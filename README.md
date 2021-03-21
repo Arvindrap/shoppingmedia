@@ -1,0 +1,2 @@
+# shoppingmedia
+shopping blog
