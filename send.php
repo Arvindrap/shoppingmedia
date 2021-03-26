@@ -8,10 +8,7 @@ if(!con){
     die("connection failed".mysqli_connect_error());
 }
 
-//$con = mysqli_connect("localhost", "root", "Arv5n321", "userregistration");
-//if(!con){
-  //  die("connection failed".mysqli_connect_error());
-//}
+
 
 $msg = $_POST['msg'];
 $name = $_SESSION['username'];
