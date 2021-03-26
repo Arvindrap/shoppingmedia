@@ -3,7 +3,7 @@
 session_start();
 
 
-$con = mysqli_connect("remotemysql.com", "of2PGRtFAA", "D9VDbWFaZ6", "of2PGRtFAA");
+$con = mysqli_connect("freedb.tech", "freedbtech_arvindra", "Arv5n321", "freedbtech_remote");
 if(!con){
     die("connection failed".mysqli_connect_error());
 }
