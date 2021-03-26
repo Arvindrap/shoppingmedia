@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect('remotemysql.com', 'of2PGRtFAA', 'D9VDbWFaZ6', 'of2PGRtFAA') or die(mysqli_error($con));
+$con = mysqli_connect('freedb.tech', 'freedbtech_arvindra', 'Arv5n321', 'freedbtech_remote') or die(mysqli_error($con));
 //$con = mysqli_connect('localhost', 'root', 'Arv5n321', 'userregistration') or die(mysqli_error($con));
 
 if (isset($_POST['announcement'])) {
