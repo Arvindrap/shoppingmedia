@@ -7,9 +7,9 @@ session_start();
 
 //mysqli_select_db($con, 'userregistration');
 
-$con = mysqli_connect('remotemysql.com', 'of2PGRtFAA', 'D9VDbWFaZ6');
+$con = mysqli_connect('freedb.tech', 'freedbtech_arvindra', 'Arv5n321');
 
-mysqli_select_db($con, 'of2PGRtFAA');
+mysqli_select_db($con, 'freedbtech_remote');
 
 $name = $_POST['user'];
 $pass = $_POST['password'];
