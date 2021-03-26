@@ -23,7 +23,7 @@ if(!isset($_SESSION['username'])){
 <body>
 <?php
     
-    $con = mysqli_connect('remotemysql.com', 'of2PGRtFAA', 'D9VDbWFaZ6', 'of2PGRtFAA') or die('Error in connection');
+    $con = mysqli_connect('freedb.tech', 'freedbtech_arvindra', 'Arv5n321', 'freedbtech_remote') or die('Error in connection');
    // $con = mysqli_connect('localhost', 'root', 'Arv5n321', 'userregistration') or die('Error in connection');
     $data = '';
     
