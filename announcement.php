@@ -4,6 +4,7 @@ session_start();
 $con = mysqli_connect('localhost', 'root', 'Arv5n321', 'userregistration') or die(mysqli_error($con));
 
 if (isset($_POST['announcement'])) {
+    $userid = $_POST['userid'];
     $image = $_FILES['image']['tmp_name'];
     $name = $_FILES['image']['name'];
     $image = base64_encode(file_get_contents(addslashes($image)));
@@ -15,7 +16,8 @@ if (empty($paragraph)||empty($title)) {
 
 }else{
     $nam = $_SESSION['username'];
-    $query = "insert into announcement(name,announcementTitle,announcement,image) values('$nam','$title','$paragraph','$image')";
+    $emailadr = $_SESSION['email'];
+    $query = "INSERT INTO announcement(userid, name, email, announcementTitle,announcement,image) VALUES('$userid','$nam','$emailadr','$title','$paragraph','$image')";
     $result = mysqli_query($con, $query);
     if ($result) {
     header("location:home.php?success=submitted");
@@ -24,7 +26,7 @@ if (empty($paragraph)||empty($title)) {
     }
 }
 }else if (isset($_POST['delete'])){
-    $query = "delete from announcement where id='".$_POST['postID']."';";
+    $query = "DELETE FROM announcement WHERE id='".$_POST['postID']."';";
     $result = mysqli_query($con,$query);
     if ($result) {
         header('location:home.php?success=deleted');

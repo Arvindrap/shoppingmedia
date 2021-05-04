@@ -34,7 +34,7 @@ if(!isset($_SESSION['username'])){
     {
         $str = $_POST['search'];
         $str = preg_replace("#[^0-9a-z]#i", "", $str);
-        $query = "select name from usertable where name LIKE '%$str%'";
+        $query = "SELECT name FROM usertable WHERE name LIKE '%$str%'";
         $result = mysqli_query($con, $query);
         $count = mysqli_num_rows($result);
         if($count>0)
@@ -70,7 +70,7 @@ if(!isset($_SESSION['username'])){
         
         <h1>Other Users</h1>
         <form action="home.php" method="post">
-            <input type="text" name="search" style="background-color: rgba(211, 211, 211, 0.5);" placeholder="Search for Users"/>
+            <input type="text" name="search" placeholder="Search for Users"/>
             <input type="submit" value="search"/>
         </form>
         <a><?php echo $data; ?></a>
@@ -82,12 +82,12 @@ if(!isset($_SESSION['username'])){
             <div class="mx-auto">
                 <?php 
                 if (isset($_SESSION['username'])) {
-                
                     echo'
-                <h1>Post an announcement</h1>
+                <h1>Post a sale</h1>
                 <form method="post" action="announcement.php" enctype="multipart/form-data">
-                    <input type="text" name="announcementTitle" style="background-color: rgba(211, 211, 211, 0.5);" placeholder="Enter Subject"><br>
-                    <textarea name="announcementBox" rows="5" cols="40" style="background-color: rgba(211, 211, 211, 0.5);" placeholder="Enter Announcement"></textarea><br>
+                    <input name="userid" type="hidden" value='.$_SESSION['id'].'>
+                    <input type="text" name="announcementTitle" placeholder="Enter Subject"><br>
+                    <textarea name="announcementBox" rows="5" cols="40" style="background-color: #fff;" placeholder="Enter Sale"></textarea><br>
                     <input type="file" name="image" accept="image/jpeg">
                     <button name="announcement" style="width: 100px; box-sizing: border-box; border: 4px solid #6495ed; border-radius: 4px;">Submit</button>
                 </form>';
@@ -102,14 +102,18 @@ if(!isset($_SESSION['username'])){
                         
                         echo '<form method="post" action="announcement.php">';
                         echo "<b>Posted by " .$row["name"]. "</b><p>";
+                        echo "<b>Contact:</b> " .$row["email"]. " or <a href='chatbox.php?toUser=".$row["userid"]."'> CHAT </a><p>";
                         echo '<input type="hidden" name="postID" value="'.$row['id'].'">';
-                        echo '<button name="delete" style="float:right">X</button>';
+                        if ($row['userid'] == $_SESSION['id']) 
+                        {
+                            echo '<button name="delete" style="float:right">Delete Post</button>';
+                        }
                         echo '</form>';
                     
                     }
                     echo $row['announcementTitle'].'<p><br>';
                     echo $row['announcement'].'<br>';
-                    echo '<img width="20%" src="data:image;base64,'.$row['image'].'"alt="Image" style="padding-top:10px">';
+                    echo '<img width="40%" src="data:image;base64,'.$row['image'].'"alt="Image" style="padding-top:10px">';
                     echo "<p><b>Comments:</b><p>";
                     echo'
                     <form method="post" action="comment.php">
@@ -125,7 +129,7 @@ if(!isset($_SESSION['username'])){
                         echo '<input type="hidden" name="id" value="'.$roww['post_id'].'">';
                         $comment_name = $roww['name'];
                         $comment = $roww['comment'];
-                        echo "<p>$comment_name: $comment<p>";
+                        echo "<p><b>$comment_name</b>: $comment<p>";
                     }
                     if(isset($_GET['error'])) {
                         echo "<p>100 Character Limit";
